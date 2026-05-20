@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: test
+  namespace: applications
 
 spec:
   replicas: 1
@@ -20,7 +20,7 @@ spec:
       containers:
       - name: backend
 
-        image: fodpapnor99/backend-app:latest
+        image: fodpapnor99/backend-app:34a1b49e
 
         imagePullPolicy: Always
 
