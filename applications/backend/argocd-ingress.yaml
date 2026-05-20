@@ -1,24 +1,27 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+
 metadata:
-  name: grafana-ingress
-  namespace: monitoring
+  name: argocd-ingress
+  namespace: argocd
+
 spec:
   ingressClassName: traefik
 
   tls:
   - hosts:
-    - grafana.local
+    - argocd.local
     secretName: local-wildcard-tls
 
   rules:
-  - host: grafana.local
+  - host: argocd.local
     http:
       paths:
       - path: /
         pathType: Prefix
+
         backend:
           service:
-            name: monitoring-grafana
+            name: argocd-server
             port:
               number: 80
