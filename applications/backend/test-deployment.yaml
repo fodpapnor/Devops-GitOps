@@ -15,12 +15,19 @@ spec:
     metadata:
       labels:
         app: backend
+  
+  
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
 
     spec:
       containers:
       - name: backend
 
-        image: fodpapnor99/backend-app:34a1b49e
+        image: fodpapnor99/backend-app:b16df7cb
 
         imagePullPolicy: Always
 
