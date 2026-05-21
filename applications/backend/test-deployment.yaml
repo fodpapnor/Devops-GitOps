@@ -1,9 +1,3 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: backend
-  namespace: applications
-
 spec:
   replicas: 1
 
@@ -15,35 +9,26 @@ spec:
     metadata:
       labels:
         app: backend
-  
-  
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 1
 
     spec:
       containers:
-      - name: backend
+        - name: backend
+          image: fodpapnor99/backend-app:b16df7cb
+          imagePullPolicy: Always
 
-        image: fodpapnor99/backend-app:b16df7cb
+          ports:
+            - containerPort: 8000
 
-        imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 
-        ports:
-        - containerPort: 8000
-
-        readinessProbe:
-          httpGet:
-            path: /health/ready
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 10
-
-        livenessProbe:
-          httpGet:
-            path: /health/live
-            port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
