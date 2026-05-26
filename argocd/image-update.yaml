@@ -1,0 +1,31 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: backend-pr-image-updater
+  namespace: argocd
+
+spec:
+  writeBackConfig:
+    method: "git:secret:argocd/git-creds"
+
+    gitConfig:
+      repository: "https://github.com/fodpapnor/Devops-GitOps.git"
+      branch: "main"
+
+      pullRequest:
+        github: {}
+
+  applicationRefs:
+    - namePattern: "backend-app"
+
+      images:
+        - alias: "backend-app"
+          imageName: "fodpapnor99/backend-app"
+          commonUpdateSettings:
+            updateStrategy: "latest"
+
+      writeBackConfig:
+        method: "git:secret:argocd/git-creds"
+
+        gitConfig:
+          writeBackTarget: "yaml:applications/backend/test-deployment.yaml"

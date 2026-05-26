@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  repository: fodpapnor99/backend-app
+  tag: b16df7cb
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: traefik
+  host: backend.local
+  path: /
+
+probes:
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 10
+    periodSeconds: 20
+
+namespace: applications
