@@ -4,5 +4,5 @@ helm:
     value: fodpapnor99/backend-app
     forcestring: true
   - name: image.tag
-    value: 9b179677
+    value: "46768558"
     forcestring: true
