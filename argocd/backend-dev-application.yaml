@@ -10,16 +10,21 @@ spec:
 
   source:
     repoURL: https://github.com/fodpapnor/Devops-GitOps.git
-    targetRevision: main
     path: applications/backend-chart
+    targetRevision: HEAD
+
+    helm:
+      valueFiles:
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: applications
+    namespace: applications-dev
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
     syncOptions:
       - CreateNamespace=true

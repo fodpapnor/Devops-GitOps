@@ -6,14 +6,15 @@ metadata:
 
 spec:
   writeBackConfig:
-    method: git:secret:argocd/git-creds
+    method: git
 
     gitConfig:
       repository: https://github.com/fodpapnor/Devops-GitOps.git
       branch: main
+      writeBackTarget: "helmvalues:values-dev.yaml"
 
   applicationRefs:
-    - namePattern: "backend"
+    - namePattern: "backend-dev"
 
       images:
         - alias: backend-app
@@ -21,3 +22,8 @@ spec:
 
           commonUpdateSettings:
             updateStrategy: newest-build
+
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
