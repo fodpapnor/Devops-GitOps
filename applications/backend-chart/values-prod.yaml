@@ -1,6 +1,8 @@
-replicaCount: 1
+replicaCount: 2
 
 nameOverride: backend-prod
+
+revisionHistoryLimit: 4
 
 image:
   repository: fodpapnor99/backend-app
@@ -23,7 +25,6 @@ probes:
     path: /health/ready
     initialDelaySeconds: 5
     periodSeconds: 10
-
   liveness:
     path: /health/live
     initialDelaySeconds: 10
