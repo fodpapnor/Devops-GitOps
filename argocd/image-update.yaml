@@ -6,26 +6,18 @@ metadata:
 
 spec:
   writeBackConfig:
-    method: "git:secret:argocd/git-creds"
+    method: git:secret:argocd/git-creds
 
     gitConfig:
-      repository: "https://github.com/fodpapnor/Devops-GitOps.git"
-      branch: "main"
-
-      pullRequest:
-        github: {}
+      repository: https://github.com/fodpapnor/Devops-GitOps.git
+      branch: main
 
   applicationRefs:
-    - namePattern: "backend-app"
+    - namePattern: "backend"
 
       images:
-        - alias: "backend-app"
-          imageName: "fodpapnor99/backend-app"
+        - alias: backend-app
+          imageName: fodpapnor99/backend-app
+
           commonUpdateSettings:
-            updateStrategy: "latest"
-
-      writeBackConfig:
-        method: "git:secret:argocd/git-creds"
-
-        gitConfig:
-          writeBackTarget: "yaml:applications/backend/test-deployment.yaml"
+            updateStrategy: newest-build

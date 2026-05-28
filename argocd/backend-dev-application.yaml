@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: backend-dev
+  namespace: argocd
+
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/fodpapnor/Devops-GitOps.git
+    targetRevision: main
+    path: applications/backend-chart
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: applications
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

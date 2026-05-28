@@ -1,5 +1,7 @@
 replicaCount: 1
 
+nameOverride: backend-prod
+
 image:
   repository: fodpapnor99/backend-app
   tag: b16df7cb
@@ -13,7 +15,7 @@ service:
 ingress:
   enabled: true
   className: traefik
-  host: backend.local
+  host: backend.prod.local
   path: /
 
 probes:
@@ -27,4 +29,4 @@ probes:
     initialDelaySeconds: 10
     periodSeconds: 20
 
-namespace: applications
+namespace: applications-prod

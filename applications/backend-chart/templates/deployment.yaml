@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: backend
+  name: {{ .Values.nameOverride }}
   namespace: {{ .Values.namespace }}
 
 spec:
@@ -16,12 +16,12 @@ spec:
 
   selector:
     matchLabels:
-      app: backend
+      app: {{ .Values.nameOverride }}
 
   template:
     metadata:
       labels:
-        app: backend
+        app: {{ .Values.nameOverride }}
 
     spec:
       containers:
