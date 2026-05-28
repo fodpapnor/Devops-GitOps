@@ -5,7 +5,7 @@ nameOverride: backend-prod
 image:
   repository: fodpapnor99/backend-app
   tag: b16df7cb
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
@@ -28,5 +28,10 @@ probes:
     path: /health/live
     initialDelaySeconds: 10
     periodSeconds: 20
+  
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  allowPrivilegeEscalation: false
 
 namespace: applications-prod
