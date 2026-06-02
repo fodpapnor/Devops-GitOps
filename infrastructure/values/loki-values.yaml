@@ -6,6 +6,17 @@ singleBinary:
 loki:
   auth_enabled: false
 
+  storage:
+    type: filesystem
+    bucketNames:
+      chunks: chunks
+      ruler: ruler
+      admin: admin
+
+  storage_config:
+    filesystem:
+      directory: /var/loki
+
 persistence:
   enabled: true
   storageClassName: local-path
