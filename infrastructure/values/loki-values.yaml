@@ -1,0 +1,15 @@
+deploymentMode: SingleBinary
+
+loki:
+  auth_enabled: false
+
+singleBinary:
+  replicas: 1
+
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 10Gi
+
+limits_config:
+  retention_period: 168h

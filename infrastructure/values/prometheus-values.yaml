@@ -1,0 +1,19 @@
+grafana:
+  adminPassword: Blh9Shu0FMYldD04LpIIq8867DD5cFSzsJNFIB1n
+
+persistence:
+  enabled: true
+  storageClassName: local-path
+  size: 10Gi
+
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 20Gi

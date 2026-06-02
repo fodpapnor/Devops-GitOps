@@ -1,0 +1,10 @@
+auth:
+  username: devops
+  password: 5ZDrROHoKAjIjxA
+  database: devopsdb
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 20Gi
