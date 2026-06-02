@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/fodpapnor/Devops-GitOps.git
     targetRevision: main
-    path: apps
+    path: infrastructure
 
   destination:
     server: https://kubernetes.default.svc
