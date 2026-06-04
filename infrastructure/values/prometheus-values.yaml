@@ -1,10 +1,10 @@
 grafana:
   adminPassword: Blh9Shu0FMYldD04LpIIq8867DD5cFSzsJNFIB1n
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 10Gi
 
-persistence:
-  enabled: true
-  storageClassName: local-path
-  size: 10Gi
 
 prometheus:
   prometheusSpec:
