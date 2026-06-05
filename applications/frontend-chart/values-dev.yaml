@@ -22,11 +22,11 @@ ingress:
 
 probes:
   readiness:
-    path: /health/ready
+    path: /
     initialDelaySeconds: 5
     periodSeconds: 10
   liveness:
-    path: /health/live
+    path: /
     initialDelaySeconds: 10
     periodSeconds: 20
 
