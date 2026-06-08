@@ -14,8 +14,13 @@ spec:
       releaseName: vault
       values: |
         server:
+          ha:
+            enabled: false
+
           standalone:
             enabled: true
+
+          replicas: 1
 
           dataStorage:
             enabled: true
