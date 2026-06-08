@@ -20,13 +20,13 @@ spec:
           dataStorage:
             enabled: true
             size: 5Gi
-            storageClass: ""
+            storageClass: "standard"
 
         ui:
           enabled: true
 
         injector:
-          enabled: true
+          enabled: false
 
   destination:
     server: https://kubernetes.default.svc
@@ -36,5 +36,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
