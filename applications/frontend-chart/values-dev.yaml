@@ -6,7 +6,7 @@ revisionHistoryLimit: 2
 
 image:
   repository: fodpapnor99/frontend-app
-  tag: 7fd92244
+  tag: 5d378fdf
   pullPolicy: Always
 
 service:
