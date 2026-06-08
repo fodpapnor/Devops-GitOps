@@ -45,8 +45,8 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-    
-    ignoreDifferences:
+
+  ignoreDifferences:
     - group: apps
       kind: StatefulSet
       jsonPointers:
