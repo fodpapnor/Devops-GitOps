@@ -14,26 +14,6 @@ spec:
       releaseName: vault
       values: |
         server:
-          ha:
-            enabled: true
-
-            raft:
-              enabled: true
-              setNodeId: true
-              config: |
-                ui = true
-
-                listener "tcp" {
-                  address = "0.0.0.0:8200"
-                  tls_disable = 1
-                }
-
-                storage "raft" {
-                  path = "/vault/data"
-                }
-
-                service_registration "kubernetes" {}
-          
           standalone:
             enabled: true
 
