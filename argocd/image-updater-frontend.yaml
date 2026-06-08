@@ -1,0 +1,29 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: frontend-pr-image-updater
+  namespace: argocd
+
+spec:
+  writeBackConfig:
+    method: git
+
+    gitConfig:
+      repository: https://github.com/fodpapnor/Devops-GitOps.git
+      branch: main
+      writeBackTarget: "helmvalues:values-dev.yaml"
+
+  applicationRefs:
+    - namePattern: "frontend-dev"
+
+      images:
+        - alias: frontend-app
+          imageName: fodpapnor99/frontend-app
+
+          commonUpdateSettings:
+            updateStrategy: newest-build
+
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
