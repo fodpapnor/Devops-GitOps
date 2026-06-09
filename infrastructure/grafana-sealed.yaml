@@ -1,0 +1,21 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: monitoring-grafana
+  namespace: monitoring
+spec:
+  encryptedData:
+    admin-password: AgALyhqGx9YtZxnaj499LhoGFqHsvu/mO3u+ZwDs+0D+FrSQ90aJyaUBJz79m1Jz/EaWlQL+j/FbdGH7BUmDuifGXKmN4grqDdvlu6whZ2qr6Od+ga3/t8ZvtLDjh5zCaFIbUajxpfcoG6LNlYubq+mVfu3+jVm7ASqMIZF1AmYiAoox5HRV+98x5Y/gc8vrsGXZHTakR/2MfcZyrwUTBJaDybTAzp/q/oQY3uM+jVst1rPtffY4XM+PFdCtJB7jiHCy9z69H70VQjXr7fIJu9xPUUof1cRS8I8BZPT33ssA5YoSXz2r0F7YdTChhEbWqtESpGuzTI54YdxkVVxfNzd3235kDdaGpWfyJmFXlXp0ENOP23T6E4mTwjTIHLB1Y/XLDAJm5gxr3b5jcucNtgfS+Z/NqAEdvuGqII+YufdI6UvicizN2t9JuGlNjvUnfUmGLbmt7xjqdg/nLlxIV7TXSs3POiJDfdUVxoPjyORsLgtP/Tq31G5IWIvFgjQCDjh2b/S8M9WcAi0+qKKeZxxwmyw3DAuE5LoQYIovbq/ntzMJ7O+tipxRsamdBSHjDftrNPyN1FhSCC14414o1T31Tz+EyCrr3+odJvo2CScUv9CyFt1FWYEsRx6KkFrPU8TGEoI5OLzPFib823sJl9Aj3ywiNbDKmpPKLmOv60t5TCWmYms31CWpDOe0AqvK6+Wjd104MAtLoqHKnSBE2Bi4L+0pP//w7tZfTCj2/84bT4Y0ioDtkB3+
+    ldap-toml: AgBzBcivDZ0xBE1lSD8aca+mPPKC16vHn+SqHwaLadaVmwFgDtIbjZnOn33fSO02LE1AwmPJV/6ECahtJM6vFSYcr69mzFpw16vxqnggNl2atWHVFcGJeOgojAQthuM2V+mM8JLXVO3ME6jcmsJNCzvz3WrAGGAZh3IVkN9q6A2ECmjYxPzuH2t0j5E9J3tKkTH8TcOohWUtuF4ZBLiuFi7fXkL82AqNE90wSc7yI3MXBnYHLIFVYciJM8Yk9tbGKU+P18XEzOnYu+7uUAhFMo/lSoTxu2XF5zH1N7StGnpGbr7dWPNHHDGPJQzgq1FH8aOgIb/sMywAqMp6fsmo2hHix5ascXIsmgZGJ1ENfiJRMuWqQzNkIkD8R4opvwJTytSAI7YSzUlN1Yj+epyyPnIOMK53x4jCF1YSZ1ol07d+04g7qK1hVVYaRF/z1HsOVcKh4hgR1NybIH2ALVYmOqzHo4NslXCD0k0wnzWRTs6+vmg3PWErDCG3gJIVtaPKQL7s36zTPjF+STjHIwRT1oMl+6WPUuN1t2T1EUS2YkTLTdeDhC8KZE40rG+yUAhDij8543Ekk+fbblbtpAEUc37I5Ch+6R+iDfQYxYucsS6Y1EF0zAbS+CEUJ259PjEqmls8tVMIpeOv0orhoOhZQ5PHqSWXrr98BaYU++ApUcgmJinYKiQFo247oPYTlRaF+NM=
+  template:
+    metadata:
+      annotations:
+        argocd.argoproj.io/tracking-id: monitoring:/Secret:monitoring/monitoring-grafana
+      labels:
+        app.kubernetes.io/instance: monitoring
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/version: 12.1.1
+        helm.sh/chart: grafana-10.0.0
+      name: monitoring-grafana
+      namespace: monitoring
+    type: Opaque

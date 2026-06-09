@@ -1,5 +1,8 @@
 grafana:
-  adminPassword: Blh9Shu0FMYldD04LpIIq8867DD5cFSzsJNFIB1n
+  admin:
+    existingSecret: monitoring-grafana
+    userKey: admin
+    passwordKey: admin-password
   persistence:
     enabled: true
     storageClassName: local-path

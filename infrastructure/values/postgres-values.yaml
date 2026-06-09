@@ -1,8 +1,8 @@
 auth:
-  username: devops
-  password: 5ZDrROHoKAjIjxA
-  database: devopsdb
+  existingSecret: postgres-postgresql
 
+  secretKeys:
+    adminPasswordKey: postgres-password
 
 image:
   repository: bitnamilegacy/postgresql
