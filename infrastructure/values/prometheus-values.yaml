@@ -1,7 +1,7 @@
 grafana:
   admin:
     existingSecret: monitoring-grafana
-    userKey: admin
+    userKey: admin-user
     passwordKey: admin-password
   persistence:
     enabled: true
