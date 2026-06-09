@@ -1,5 +1,5 @@
 auth:
-  existingSecret: postgres-postgresql
+  existingSecret: postgres-postgresql-sealed
 
   secretKeys:
     adminPasswordKey: postgres-password

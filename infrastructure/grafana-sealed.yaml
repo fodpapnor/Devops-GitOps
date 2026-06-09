@@ -1,7 +1,7 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: monitoring-grafana
+  name: monitoring-grafana-sealed
   namespace: monitoring
 spec:
   encryptedData:
@@ -10,12 +10,12 @@ spec:
   template:
     metadata:
       annotations:
-        argocd.argoproj.io/tracking-id: monitoring:/Secret:monitoring/monitoring-grafana
+        argocd.argoproj.io/tracking-id: monitoring:/Secret:monitoring/monitoring-grafana-sealed
       labels:
         app.kubernetes.io/instance: monitoring
         app.kubernetes.io/name: grafana
         app.kubernetes.io/version: 12.1.1
         helm.sh/chart: grafana-10.0.0
-      name: monitoring-grafana
+      name: monitoring-grafana-sealed
       namespace: monitoring
     type: Opaque
