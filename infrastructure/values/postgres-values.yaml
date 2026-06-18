@@ -2,7 +2,7 @@ auth:
   existingSecret: postgres-postgresql
 
   secretKeys:
-    adminPasswordKey: postgres-password
+    adminPasswordKey: postgresql-password
 
 image:
   repository: bitnamilegacy/postgresql
