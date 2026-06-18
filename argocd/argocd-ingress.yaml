@@ -1,25 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-
 metadata:
-  name: argocd-ingress
+  name: argocd
   namespace: argocd
-
 spec:
   ingressClassName: traefik
-
   tls:
   - hosts:
-    - argocd.local
-    secretName: local-wildcard-tls
+    - argocd.dev.local
+    secretName: wildcard-tls
 
   rules:
-  - host: argocd.local
+  - host: argocd.dev.local
     http:
       paths:
       - path: /
         pathType: Prefix
-
         backend:
           service:
             name: argocd-server
