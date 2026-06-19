@@ -3,7 +3,7 @@ nameOverride: frontend-dev
 revisionHistoryLimit: 2
 image:
   repository: fodpapnor99/frontend-app
-  tag: "c2194b57"
+  tag: "latest"
   pullPolicy: Always
 service:
   type: ClusterIP
@@ -23,7 +23,6 @@ probes:
     path: /
     initialDelaySeconds: 10
     periodSeconds: 20
-  
 resources:
   requests:
     cpu: "100m"
@@ -31,7 +30,6 @@ resources:
   limits:
     cpu: "500m"
     memory: "256Mi"
-
 securityContext:
   runAsNonRoot: true
   runAsUser: 101
@@ -39,6 +37,5 @@ securityContext:
   readOnlyRootFilesystem: true
   capabilities:
     drop:
-      - ALL
-    
+    - ALL
 namespace: applications-dev
