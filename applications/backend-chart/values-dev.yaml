@@ -28,4 +28,16 @@ probes:
     initialDelaySeconds: 10
     periodSeconds: 20
 
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
+
+securityContext:
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+
 namespace: applications-dev
