@@ -1,19 +1,24 @@
 replicaCount: 1
 nameOverride: backend-dev
 revisionHistoryLimit: 2
+
 image:
   repository: fodpapnor99/backend-app
   tag: latest
   pullPolicy: Always
+
 service:
   type: ClusterIP
   port: 80
   targetPort: 8000
+
 ingress:
   enabled: true
   className: traefik
   host: backend.dev.local
   path: /
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: applications-dev-redirect-to-https@kubernetescrd   
 probes:
   readiness:
     path: /health/ready
@@ -23,4 +28,5 @@ probes:
     path: /health/live
     initialDelaySeconds: 10
     periodSeconds: 20
+
 namespace: applications-dev

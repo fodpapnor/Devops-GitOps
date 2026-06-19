@@ -1,7 +1,5 @@
 replicaCount: 2
-
 nameOverride: backend-prod
-
 revisionHistoryLimit: 4
 
 image:
@@ -19,7 +17,8 @@ ingress:
   className: traefik
   host: backend.prod.local
   path: /
-
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: applications-dev-redirect-to-https@kubernetescrd
 probes:
   readiness:
     path: /health/ready
