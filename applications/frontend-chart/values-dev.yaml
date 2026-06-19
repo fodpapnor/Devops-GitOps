@@ -17,8 +17,7 @@ ingress:
   className: traefik
   host: frontend.dev.local
   path: /
-  annotations:
-    traefik.ingress.kubernetes.io/router.middlewares: applications-dev-redirect-to-https@kubernetescrd
+    
 probes:
   readiness:
     path: /

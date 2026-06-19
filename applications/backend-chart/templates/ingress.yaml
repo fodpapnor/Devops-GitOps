@@ -6,10 +6,8 @@ kind: Ingress
 metadata:
   name: {{ .Values.nameOverride }}-ingress
   namespace: {{ .Values.namespace }}
-  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-{{ .Values.nameOverride }}-redirect-to-https@kubernetescrd"
 
 spec:
   ingressClassName: {{ .Values.ingress.className }}
