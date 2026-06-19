@@ -38,6 +38,12 @@ resources:
 
 securityContext:
   runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
   allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
 
 namespace: applications-prod

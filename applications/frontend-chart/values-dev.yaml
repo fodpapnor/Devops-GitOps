@@ -34,6 +34,11 @@ resources:
 
 securityContext:
   runAsNonRoot: true
+  runAsUser: 101
   allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
     
 namespace: applications-dev
