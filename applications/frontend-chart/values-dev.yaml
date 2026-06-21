@@ -3,7 +3,7 @@ nameOverride: frontend-dev
 revisionHistoryLimit: 2
 image:
   repository: fodpapnor99/frontend-app
-  tag: "latest"
+  tag: "7f113f2f"
   pullPolicy: Always
 service:
   type: ClusterIP
