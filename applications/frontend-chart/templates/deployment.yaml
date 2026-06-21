@@ -64,13 +64,13 @@ spec:
           
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-    volumes:
+      volumes:
 
-      - name: nginx-cache
-        emptyDir: {}
+        - name: nginx-cache
+          emptyDir: {}
 
-      - name: nginx-run
-        emptyDir: {}
+        - name: nginx-run
+          emptyDir: {}
 
-      - name: nginx-tmp
-        emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}
