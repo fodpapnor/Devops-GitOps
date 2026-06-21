@@ -3,7 +3,7 @@ nameOverride: backend-dev
 revisionHistoryLimit: 2
 image:
   repository: fodpapnor99/backend-app
-  tag: 7f113f2f
+  tag: f3db70be
   pullPolicy: Always
 service:
   type: ClusterIP
