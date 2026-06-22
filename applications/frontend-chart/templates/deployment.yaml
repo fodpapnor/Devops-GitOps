@@ -38,6 +38,9 @@ spec:
           ports:
             - containerPort: {{ .Values.service.targetPort }}
 
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+            
           volumeMounts:
             - name: nginx-cache
               mountPath: /var/cache/nginx
@@ -61,9 +64,7 @@ spec:
               port: {{ .Values.service.targetPort }}
             initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
             periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
-          
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+
       volumes:
 
         - name: nginx-cache
