@@ -30,6 +30,8 @@ resources:
   limits:
     cpu: "500m"
     memory: "256Mi"
+autoscaling:
+  enabled: false
 securityContext:
   runAsNonRoot: true
   runAsUser: 10001

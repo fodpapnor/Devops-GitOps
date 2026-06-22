@@ -6,7 +6,9 @@ metadata:
   namespace: {{ .Values.namespace }}
 
 spec:
+  {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
+{{- end }}
 
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
 
