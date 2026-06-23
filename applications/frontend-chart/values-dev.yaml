@@ -50,9 +50,10 @@ securityContext:
     drop:
     - ALL
 
-config:
+configMap:
   enabled: true
-  APP_ENV: dev
-  LOG_LEVEL: info
-  
+  data:
+    APP_ENV: dev
+    LOG_LEVEL: info
+
 namespace: applications-dev

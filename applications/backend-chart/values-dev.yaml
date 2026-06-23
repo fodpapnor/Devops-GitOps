@@ -57,10 +57,11 @@ securityContext:
     drop:
     - ALL
 
-config:
+configMap:
   enabled: true
-  APP_ENV: dev
-  LOG_LEVEL: info
+  data:
+    APP_ENV: dev
+    LOG_LEVEL: info
 
 secretName: backend-prod-secret
 
