@@ -15,7 +15,6 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-
   
   selector:
     matchLabels:
@@ -29,7 +28,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
-      
+
       containers:
         - name: frontend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -43,6 +42,12 @@ spec:
 
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+
+          {{- if .Values.configMap.enabled }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.nameOverride }}-config
+          {{- end }}
             
           volumeMounts:
             - name: nginx-cache

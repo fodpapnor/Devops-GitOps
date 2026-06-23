@@ -31,7 +31,7 @@ spec:
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
       automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
-      
+
       containers:
         - name: backend
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -46,6 +46,12 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
+          {{- if .Values.configMap.enabled }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.nameOverride }}-config
+          {{- end }}
+          
           readinessProbe:
             httpGet:
               path: {{ .Values.probes.readiness.path }}
