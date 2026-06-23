@@ -9,6 +9,10 @@ service:
   type: ClusterIP
   port: 80
   targetPort: 8000
+serviceAccount:
+  create: true
+  name: backend-dev
+  automountServiceAccountToken: false
 ingress:
   enabled: true
   className: traefik
