@@ -32,6 +32,8 @@ resources:
     memory: "256Mi"
 autoscaling:
   enabled: false
+podDisruptionBudget:
+  enabled: false
 securityContext:
   runAsNonRoot: true
   runAsUser: 10001
