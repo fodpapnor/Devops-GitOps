@@ -11,7 +11,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
 
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
- adqweae: 1231311231
+
   strategy:
     type: RollingUpdate
     rollingUpdate:
