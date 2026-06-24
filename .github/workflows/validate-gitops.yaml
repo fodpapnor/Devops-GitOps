@@ -21,8 +21,8 @@ permissions:
   contents: read
 
 jobs:
-  validate-helm:
-    name: Helm validate - ${{ matrix.release }}
+  validate:
+    name: Helm + Kubeconform validation - ${{ matrix.release }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -51,12 +51,7 @@ jobs:
       - name: Setup Helm
         uses: azure/setup-helm@v4
 
-      - name: Helm lint
-        run: |
-          helm lint "${{ matrix.chart }}" \
-            -f "${{ matrix.values }}"
-
-      - name: Helm template
+      - name: Render Helm templates
         run: |
           mkdir -p rendered
           helm template "${{ matrix.release }}" "${{ matrix.chart }}" \
@@ -64,27 +59,12 @@ jobs:
             -f "${{ matrix.values }}" \
             > "rendered/${{ matrix.release }}.yaml"
 
-      - name: Upload rendered manifest
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: rendered-${{ matrix.release }}
-          path: rendered/${{ matrix.release }}.yaml
-          
-  gitops-validation:
-    name: GitOps validation
-    runs-on: ubuntu-latest
-    needs:
-      - validate-helm
-    if: always()
-
-    steps:
-      - name: Check validation result
+      - name: Run kubeconform validation
         run: |
-          if [ "${{ needs.validate-helm.result }}" != "success" ]; then
-            echo "GitOps validation failed"
-            exit 1
-          fi
-
-          echo "GitOps validation passed"
-  
+          docker run --rm \
+            -v ${{ github.workspace }}/rendered:/rendered \
+            ghcr.io/yannh/kubeconform:latest \
+            -strict \
+            -summary \
+            -ignore-missing-schemas \
+            /rendered/${{ matrix.release }}.yaml
