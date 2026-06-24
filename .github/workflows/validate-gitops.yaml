@@ -70,3 +70,21 @@ jobs:
         with:
           name: rendered-${{ matrix.release }}
           path: rendered/${{ matrix.release }}.yaml
+          
+  gitops-validation:
+    name: GitOps validation
+    runs-on: ubuntu-latest
+    needs:
+      - validate-helm
+    if: always()
+
+    steps:
+      - name: Check validation result
+        run: |
+          if [ "${{ needs.validate-helm.result }}" != "success" ]; then
+            echo "GitOps validation failed"
+            exit 1
+          fi
+
+          echo "GitOps validation passed"
+  
