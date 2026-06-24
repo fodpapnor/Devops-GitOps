@@ -11,7 +11,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
 
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
-              asd: 123123 13213
+
   strategy:
     type: RollingUpdate
     rollingUpdate:
