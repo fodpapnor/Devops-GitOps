@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   validate:
-    name: Helm + Kubeconform validation - ${{ matrix.release }}
+    name: Helm + Kubeconform - ${{ matrix.release }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -45,11 +45,9 @@ jobs:
             namespace: applications-dev
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Helm
-        uses: azure/setup-helm@v4
+      - uses: azure/setup-helm@v4
 
       - name: Render Helm templates
         run: |
@@ -59,11 +57,36 @@ jobs:
             -f "${{ matrix.values }}" \
             > "rendered/${{ matrix.release }}.yaml"
 
-      - name: Run kubeconform validation
+      - name: Run kubeconform (JSON output)
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/rendered:/rendered \
             ghcr.io/yannh/kubeconform:latest \
             -output json \
             -ignore-missing-schemas \
-            /rendered/${{ matrix.release }}.yaml
+            /rendered/${{ matrix.release }}.yaml \
+            > kubeconform-${{ matrix.release }}.json
+
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: kubeconform-${{ matrix.release }}
+          path: kubeconform-${{ matrix.release }}.json
+
+
+  summary:
+    name: GitOps validation summary
+    runs-on: ubuntu-latest
+    needs: validate
+
+    steps:
+      - name: Check matrix result
+        run: |
+          echo "Checking validation results..."
+
+          if [ "${{ needs.validate.result }}" != "success" ]; then
+            echo "GitOps validation FAILED"
+            exit 1
+          fi
+
+          echo "GitOps validation PASSED"
