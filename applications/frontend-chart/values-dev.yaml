@@ -12,6 +12,7 @@ service:
   port: 80
   targetPort: 80
 
+# GITHUB ACTIONS TEST
 serviceAccount:
   create: true
   name: frontend-dev-sa
