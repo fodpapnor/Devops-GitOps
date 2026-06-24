@@ -1,0 +1,72 @@
+name: Validate GitOps
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "applications/**"
+      - ".github/workflows/validate-gitops.yaml"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "applications/**"
+      - ".github/workflows/validate-gitops.yaml"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-helm:
+    name: Helm validate - ${{ matrix.release }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - release: backend-dev
+            chart: applications/backend-chart
+            values: applications/backend-chart/values-dev.yaml
+            namespace: applications-dev
+
+          - release: backend-prod
+            chart: applications/backend-chart
+            values: applications/backend-chart/values-prod.yaml
+            namespace: applications-prod
+
+          - release: frontend-dev
+            chart: applications/frontend-chart
+            values: applications/frontend-chart/values-dev.yaml
+            namespace: applications-dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: |
+          helm lint "${{ matrix.chart }}" \
+            -f "${{ matrix.values }}"
+
+      - name: Helm template
+        run: |
+          mkdir -p rendered
+          helm template "${{ matrix.release }}" "${{ matrix.chart }}" \
+            --namespace "${{ matrix.namespace }}" \
+            -f "${{ matrix.values }}" \
+            > "rendered/${{ matrix.release }}.yaml"
+
+      - name: Upload rendered manifest
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rendered-${{ matrix.release }}
+          path: rendered/${{ matrix.release }}.yaml
