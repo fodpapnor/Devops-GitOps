@@ -3,6 +3,8 @@ kind: Middleware
 metadata:
   name: {{ .Values.nameOverride }}-security-headers
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
 spec:
   headers:
     stsSeconds: 300

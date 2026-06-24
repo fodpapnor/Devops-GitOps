@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: {{ .Values.nameOverride }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 
 spec:
   {{- if not .Values.autoscaling.enabled }}

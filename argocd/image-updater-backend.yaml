@@ -3,11 +3,9 @@ kind: ImageUpdater
 metadata:
   name: backend-pr-image-updater
   namespace: argocd
-
 spec:
   writeBackConfig:
     method: git
-
     gitConfig:
       repository: https://github.com/fodpapnor/Devops-GitOps.git
       branch: main
@@ -15,13 +13,18 @@ spec:
 
   applicationRefs:
     - namePattern: "backend-dev"
-
       images:
         - alias: backend-app
           imageName: fodpapnor99/backend-app
 
           commonUpdateSettings:
             updateStrategy: newest-build
+            allowTags: "regexp:^[0-9a-f]{7,40}$"
+            ignoreTags:
+              - latest
+              - main
+              - master
+              - dev
 
           manifestTargets:
             helm:

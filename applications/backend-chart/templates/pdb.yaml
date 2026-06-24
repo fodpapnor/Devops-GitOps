@@ -4,6 +4,8 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ .Values.nameOverride }}
   namespace: {{ .Values.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   maxUnavailable: {{ .Values.podDisruptionBudget.maxUnavailable }}
   selector:

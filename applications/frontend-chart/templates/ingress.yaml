@@ -8,7 +8,7 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: "{{ .Values.namespace }}-{{ .Values.nameOverride }}-redirect-to-https@kubernetescrd,{{ .Values.namespace }}-{{ .Values.nameOverride }}-security-headers@kubernetescrd"
-
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
 
