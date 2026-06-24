@@ -64,6 +64,6 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}/rendered:/rendered \
             ghcr.io/yannh/kubeconform:latest \
-            - output json \
+            -output json \
             -ignore-missing-schemas \
             /rendered/${{ matrix.release }}.yaml
