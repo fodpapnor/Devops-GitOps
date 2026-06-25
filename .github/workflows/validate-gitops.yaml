@@ -3,14 +3,14 @@ name: Validate GitOps
 on:
   pull_request:
     branches:
-      - main
+      - feature/update
     paths:
       - "applications/**"
       - ".github/workflows/validate-gitops.yaml"
 
   push:
     branches:
-      - main
+      - feature/update
     paths:
       - "applications/**"
       - ".github/workflows/validate-gitops.yaml"
