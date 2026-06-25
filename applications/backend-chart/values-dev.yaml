@@ -1,28 +1,23 @@
 replicaCount: 1
 nameOverride: backend-dev
 revisionHistoryLimit: 2
-
 image:
   repository: fodpapnor99/backend-app
-  tag: f3db70be
+  tag: b838671a
   pullPolicy: Always
-
 service:
   type: ClusterIP
   port: 80
   targetPort: 8000
-
 serviceAccount:
   create: true
   name: backend-dev-sa
   automountServiceAccountToken: false
-
 ingress:
   enabled: true
   className: traefik
   host: backend.dev.local
   path: /
-
 probes:
   readiness:
     path: /health/ready
@@ -32,7 +27,6 @@ probes:
     path: /health/live
     initialDelaySeconds: 10
     periodSeconds: 20
-
 resources:
   requests:
     cpu: "100m"
@@ -40,13 +34,10 @@ resources:
   limits:
     cpu: "500m"
     memory: "256Mi"
-
 autoscaling:
   enabled: false
-
 podDisruptionBudget:
   enabled: false
-
 securityContext:
   runAsNonRoot: true
   runAsUser: 10001
@@ -56,13 +47,10 @@ securityContext:
   capabilities:
     drop:
     - ALL
-
 configMap:
   enabled: true
   data:
     APP_ENV: dev
     LOG_LEVEL: info
-
 secretName: backend-prod-secret
-
 namespace: applications-dev
