@@ -6,6 +6,8 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+  labels:
+    app: {{ .Values.nameOverride }}
 
 spec:
   selector:
